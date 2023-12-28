@@ -3,7 +3,7 @@ import type { Config } from 'tailwindcss'
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/Components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './node_modules/@rewind-ui/core/dist/theme/styles/Calendar.styles.js',
     './node_modules/@rewind-ui/core/dist/theme/styles/Accordion.styles.js',
