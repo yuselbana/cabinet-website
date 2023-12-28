@@ -21,11 +21,11 @@ const SideBarComponent = ({number,navListItem,href,nav,setNav} : {number:string,
 
 
 interface NavBarProps {
-    isInView:boolean
-    }
+  
+}
    
     
-const NavBar: React.FunctionComponent<NavBarProps> = ({isInView}) => {
+const NavBar: React.FunctionComponent<NavBarProps> = () => {
     const [nav,setNav] = useState(false);
 
 
