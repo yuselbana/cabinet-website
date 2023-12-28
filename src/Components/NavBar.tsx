@@ -7,7 +7,6 @@ import { UilX } from "@iconscout/react-unicons";
 import Link from "next/link"
 import {motion} from 'framer-motion'
 import HeadRoom from 'react-headroom'
-import Head from "next/head";
 
 const SideBarComponent = ({number,navListItem,href,nav,setNav} : {number:string, navListItem:string,href:string,nav:boolean, setNav:React.Dispatch<React.SetStateAction<boolean>>}) => {
    return (
@@ -33,7 +32,7 @@ const NavBar: React.FunctionComponent<NavBarProps> = () => {
     
     const SideBar= () => {
         return (
-            <div className="grid grid-rows-3 fixed right-0 top-0 w-screen lg:w-[50vw] bg-mainblue text-white h-screen overflow-hidden self-stretch place-items-center">
+            <div className="grid grid-rows-3 fixed right-0 top-0 w-screen lg:w-[50vw] bg-mainblue text-white h-screen overflow-hidden self-stretch place-items-center touch-none">
             
                
                 <div className="cursor-pointer" onClick={()=>{setNav(!nav); document.body.style.overflowY='auto'}}>
@@ -70,11 +69,7 @@ const NavBar: React.FunctionComponent<NavBarProps> = () => {
 
 
     return (  
-       <>
-       <Head>
-       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-       </Head>
-       <HeadRoom style={{display:'flex',justifyContent:'center',alignItems:'center'}} 
+        <HeadRoom style={{display:'flex',justifyContent:'center',alignItems:'center'}} 
         wrapperStyle={{position:'fixed',top:'0px',zIndex:'50', background:'transparent', width:'100%'}}   
        >
             <div className="xl:w-2/3 p-4 xl:p-0 flex items-center justify-center bg-[rgba(255,255,255,0.95)] h-[7rem] gap-20 rounded-xl">
@@ -105,8 +100,6 @@ const NavBar: React.FunctionComponent<NavBarProps> = () => {
             </div>
 
         </HeadRoom >
-       
-       </>
     );
 }
  
