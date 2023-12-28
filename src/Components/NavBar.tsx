@@ -32,7 +32,7 @@ const NavBar: React.FunctionComponent<NavBarProps> = () => {
     
     const SideBar= () => {
         return (
-            <div className="grid grid-rows-3 fixed right-0 top-0 w-screen lg:w-[50vw] bg-mainblue text-white h-screen overflow-hidden self-stretch place-items-center">
+            <div className="grid grid-rows-3 fixed right-0 h-screen top-0 w-screen lg:w-[50vw] bg-mainblue text-white  overflow-hidden self-stretch place-items-center">
             
                
                 <div className="cursor-pointer" onClick={()=>{setNav(!nav); document.body.style.overflowY='auto'}}>
@@ -70,7 +70,7 @@ const NavBar: React.FunctionComponent<NavBarProps> = () => {
 
     const handleBarClick = () => {
         setNav(!nav);
-        document.body.style.overflowY = nav ? 'hidden' : 'auto';
+        document.body.style.overflowY = nav ? 'auto' : 'hidden';
     }
 
     return (  
