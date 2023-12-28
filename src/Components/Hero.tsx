@@ -48,7 +48,7 @@ const TitleComponent = ({title}:{title:string}) => {
 
     return ( 
         <>
-        <NavBar isInView={isInView}/>
+        <NavBar/>
        <div className="h-screen grid grid-row-1 grid-col-1 ">
         <div className="row-start-1 row-end-1 col-start-1 col-end-1 z-10 flex flex-col items-start justify-center gap-12  text-white pl-24 bg-[rgba(0,0,0,0.4)] backdrop-blur-sm">
             <section ref={ref} className="flex flex-col items-start justify-center gap-2 ">
