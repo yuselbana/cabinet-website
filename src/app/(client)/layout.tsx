@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter, Poppins, } from 'next/font/google'
-import './globals.css'
+import { Inter, Nunito,Poppins } from 'next/font/google'
 import NavBar from '@/Components/NavBar'
-const poppins = Poppins({ subsets: ['latin'], weight:['300','400','700']})
+import { Toaster } from "react-hot-toast";
 
+const poppins = Poppins({ subsets: ['latin'], weight:['400','700']})
 
 export const metadata: Metadata = {
   title: 'ProDesign Kitchens',
@@ -17,14 +17,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-
-     <body className={poppins.className}>
- 
+     
+      <body className={poppins.className}>
+        <NavBar/> 
+        <Toaster position='top-center' toastOptions={{duration:5000 }}/>
         {children}
- 
+     
         </body>
-  
-      
     </html>
   )
 }
