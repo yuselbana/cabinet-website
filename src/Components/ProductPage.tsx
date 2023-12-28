@@ -232,8 +232,8 @@ export const ProductPage: React.FunctionComponent<ProductPageProps> =
        </>
           <div className="flex flex-col justify-center items-center gap-4 ">
            
-            <h3 className="italic text-3xl">{productObjectsTitle}</h3>
-            <p className="">{productObjectsCaption}</p>
+            <h3 className="italic text-3xl text-center">{productObjectsTitle}</h3>
+            <p className="text-center p-2">{productObjectsCaption}</p>
        
           <div className=" min-h-screen grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-y-4  w-full justify-items-center">
           {productObjects.map((product,key)=> {

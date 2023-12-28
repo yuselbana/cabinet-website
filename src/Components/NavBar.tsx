@@ -22,7 +22,7 @@ const SideBarComponent = ({number,navListItem,href,nav,setNav} : {number:string,
 
 interface NavBarProps {
   
-}
+    }
    
     
 const NavBar: React.FunctionComponent<NavBarProps> = () => {
@@ -81,7 +81,7 @@ const NavBar: React.FunctionComponent<NavBarProps> = () => {
        
 
             <div className="cursor-pointer">
-            <UilBars  onClick={()=>{setNav(!nav); document.body.style.overflowY='hidden'}} className="text-mainblue inline md:hidden" size={"60"}/>
+            <UilBars  onTouchStart={()=>{setNav(!nav); document.body.style.overflowY='hidden'}} className="text-mainblue inline md:hidden" size={"60"}/>
             </div>
         {nav ? 
          <SideBar/>  
