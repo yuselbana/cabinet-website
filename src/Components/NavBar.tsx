@@ -68,6 +68,11 @@ const NavBar: React.FunctionComponent<NavBarProps> = () => {
     }
 
 
+    const handleBarClick = () => {
+        setNav(!nav);
+        document.body.style.overflowY = nav ? 'hidden' : 'auto';
+    }
+
     return (  
         <HeadRoom style={{display:'flex',justifyContent:'center',alignItems:'center'}} 
         wrapperStyle={{position:'fixed',top:'0px',zIndex:'50', background:'transparent', width:'100%'}}   
@@ -80,8 +85,8 @@ const NavBar: React.FunctionComponent<NavBarProps> = () => {
 
        
 
-            <div className="cursor-pointer">
-            <UilBars  onTouchStart={()=>{setNav(!nav); document.body.style.overflowY='hidden'}} className="text-mainblue inline md:hidden" size={"60"}/>
+            <div className="inline md:hidden cursor-pointer">
+            <UilBars  onClick={handleBarClick} className="text-mainblue inline md:hidden" size={"60"}/>
             </div>
         {nav ? 
          <SideBar/>  
