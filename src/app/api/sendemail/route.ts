@@ -5,7 +5,7 @@ import { transporter, mailOptions } from "@/nodemailer/nodemailer";
 
     var subject = ""
     var html = ""
-        if((body.consultation || body.design || body.dateAndTime )== (undefined ||null || '')) {
+        if((body.consultation || body.design || body.dateAndTime )== (undefined ||null)) {
             subject="Client that has questions"
             html = 
             `
