@@ -103,13 +103,13 @@ export const HeroProduct:React.FunctionComponent<HeroProductProps> =
          <div className="grid grid-rows-1 h-4/5 lg:grid-rows-none lg:grid-cols-3 overflow-hidden w-4/5 gap-x-24 ">
 
             
-         <div className="flex flex-col justify-around items-start h-full lg:row-start-1 lg:row-end-4 ">
+         <div className="flex flex-col justify-around items-start h-full lg:row-start-1 lg:row-end-4  ">
            <section className="flex flex-col justify-start items-center text-center lg:text-left lg:items-start gap-4">
             <span className="text-mainblue">{header}</span>
            <h1 className="text-3xl lg:text-5xl font-semibold ">{heroTitle}</h1>
             <p>{heroParagraph}</p>
            </section>
-                <Accordion className="text-center lg:text-left border-black "  bordered={true} shadow="lg" activeColor="blue" >
+                <Accordion className="text-center lg:text-left border-black overflow-y-scroll "  bordered={true} shadow="lg" activeColor="blue" >
 
 
                 <Accordion.Item anchor={`item-${accordionNumber1}`}>
