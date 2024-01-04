@@ -7,6 +7,7 @@ import {motion} from 'framer-motion'
 import Link from "next/link";
 import format from "date-fns/format";
 import {FormControl} from "@rewind-ui/core";
+import { id } from "date-fns/locale";
 
 
 
@@ -23,23 +24,47 @@ interface BookProps {
 const Book: React.FunctionComponent<BookProps> = () => {
   
     const currentDate = new Date();
-
-    const formattedDate = format(currentDate, 'EE MMM dd yyyy')
-
-    const times = ['10:00 am', '10:30 am', '11:00 am', '11:30 am', '12:00 pm', '12:30 pm','1:00 pm','1:30 pm', '2:00 pm' ]
+    const yesterday = new Date()
+    yesterday.setDate(currentDate.getDate()-1)
    
-    // const formattedTime = format(currentDate, 'HH:mm');
+    const formattedDate = format(currentDate, 'EE MMM dd yyyy')
+    const formattedTime = format(currentDate, 'h:mm bbb');
+    
+   
+    var allTimes = ['10:00 am', '10:30 am', '11:00 am', '11:30 am', '12:00 pm', 
+    '12:30 pm','1:00 pm','1:30 pm', '2:00 pm','2:30 pm','3:00 pm','3:30 pm','4:00 pm','4:30 pm','5:00 pm', '7:00 pm'];
 
+    function createCustomDate(hours:number, minutes:number) {
+        const currentDate = new Date();
+        currentDate.setHours(hours, minutes, 0, 0);
+        return currentDate;
+      }
+      
   
+      const customDateTimes = allTimes.map(allTimes => {
+        const [hours, minutes, period] = allTimes.split(/[ :]/);
+        const isPM = period.toLowerCase() === 'pm';
+        const adjustedHours = isPM && parseInt(hours, 10) !== 12 ? parseInt(hours, 10) + 12 : parseInt(hours, 10);
+        return createCustomDate(adjustedHours, parseInt(minutes, 10));
+      });
+   
+
+      const availableTimes:string[]= []
+      for(var i =0; i< customDateTimes.length;i++) {
+        if(customDateTimes[i].getTime() > currentDate.getTime()) {
+           availableTimes.push(format(customDateTimes[i], 'h:mm bbb'))
+        }
+      }
 
 
+        const [mapTimes, setMapTimes] = useState<string[]>(allTimes)
+      
         const [date,setDate] = useState<string |undefined | null>()
-        const [time,setTime] = useState<string | undefined | null>("10:00 am")
+        const [time,setTime] = useState<string | undefined | null>()
         const [form,setForm] = useState<boolean>(false)
-        const [dateAndTime,setDateAndTime] = useState<string>(formattedDate)
+        const [dateAndTime,setDateAndTime] = useState<string>()
         const [person,setPerson] = useState<string>('Nik')
-       
-
+   
         
         const handleClick = ({e}: {e:React.MouseEvent<HTMLDivElement>}) => {
             const divTarget = e.target as HTMLDivElement; 
@@ -51,21 +76,39 @@ const Book: React.FunctionComponent<BookProps> = () => {
             return (
                 <motion.div
                 onClick={(e: React.MouseEvent<HTMLDivElement>)=>handleClick({e})}            
-                className={`flex justify-start items-center p-4 border-2 border-mainblue hover:cursor-pointer bg-${t==time ? "dodgerblue text-white": "transparent"} `}>
+                className={`flex justify-start items-center p-4 border-2 border-mainblue hover:cursor-pointer ${t==time ? "bg-dodgerblue text-white": "bg-transparent"} `}>
                     {t}
                 </motion.div>
             )
         }
      
+        useEffect(() => {
+            setTime(mapTimes[0])
+         
+        }, [mapTimes]);
+
+     
+        useEffect(() => {
+            if(date == undefined ){
+                setDate(formattedDate)
+            }
+            setDateAndTime(`${date} at ${time} with ${person}`)
+              
+        },[date,time,person]);
 
 
-    useEffect(() => {
-        if(date == undefined ) {
-            setDate(formattedDate)
-        }
-        setDateAndTime(`${date}, at ${time} with ${person}`)
-       
-    }, [date,time,person]);
+        useEffect(() => {
+            if(date != undefined) {
+                const [dayOfTheWeek, month,day,year] = date.split(/[ ]/)
+                if(parseInt(day,10) != currentDate.getDate()) {
+                    setMapTimes(allTimes)
+                    
+                }else {
+                    setMapTimes(availableTimes)
+                }
+            }
+        }, [date]);
+
 
     return (  
             <>
@@ -81,14 +124,18 @@ const Book: React.FunctionComponent<BookProps> = () => {
 
 
       <div className="row-start-2 row-end-5  grid grid-rows-3 gap-y-8  xl:grid-rows-none xl:col-span-3 xl:grid-cols-3  xl:gap-y-0 xl:gap-x-8  ">
-      <Calendar disabledWeekends={false} size="lg" shadow='xl' onChange={(e)=> {setDate(e?.toDateString())}} />
+      <Calendar minDate={yesterday} disabledWeekends={false} size="lg" shadow='xl' onChange={(e)=> {setDate(e?.toDateString())}} />
         
         <div className="grid grid-cols-4 justify-center items-start h-fit gap-4">
-    {times.map((time,key)=> {
-    return (
-        <TimeComponent key={key} t={time}/>
-    )
-    }) }
+        {mapTimes.length == 0 ?  <h3 className="w-full row-span-full col-span-full text-mainblue">No booking times available, please select a future date.</h3> : 
+        
+        mapTimes.map((time,key)=> {
+            return (
+                <TimeComponent key={key} t={time}/>
+            )
+            }) }
+        
+        
         </div>
 
         <div className="flex flex-col items-start justify-between ">

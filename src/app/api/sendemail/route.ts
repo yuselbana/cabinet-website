@@ -5,7 +5,7 @@ import { transporter, mailOptions } from "@/nodemailer/nodemailer";
 
     var subject = ""
     var html = ""
-        if((body.consultation || body.design || body.dateAndTime )== (undefined ||null)) {
+        if( body.dateAndTime == (undefined ||null)) {
             subject="Client that has questions"
             html = 
             `
@@ -21,8 +21,6 @@ import { transporter, mailOptions } from "@/nodemailer/nodemailer";
             <strong>Full Name</strong>: <span>${body.fName + ' ' +body.lName}</span><br/><br/>
             <strong>Email Address</strong>: <span>${body.email}</span><br/><br/>
             <strong>Phone Number</strong>: <span>${body.phone}</span><br/><br/>
-            <strong>Design</strong>: <span>${body.design }</span> <br/><br/>
-            <strong>Consultation</strong>: <span>${body.consultation}</span> <br/><br/>
             <strong>Message</strong>: <span>${body.message}</span>
             `
         }

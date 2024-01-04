@@ -66,8 +66,6 @@ const [formValues, setFormValues] = useState<{
     email:string
     phone:string
     message:string
-    consultation:string|undefined | null
-    design:string|undefined | null
     dateAndTime:string | undefined| null
 
 }>({
@@ -76,8 +74,6 @@ const [formValues, setFormValues] = useState<{
     email:'',
     phone:'',
     message:'',
-    consultation:'',
-    design:'',
     dateAndTime:dateAndTime
 })
    
@@ -105,21 +101,6 @@ const [formValues, setFormValues] = useState<{
             </FormControl>
       
 
-           {form ? <div className="flex flex-col justify-start items-start gap-4 w-full col-start-1 col-end-3">
-            <p>Select Service</p>
-            
-            <section className="flex justify-between items-center gap-2" >
-
-            <input  onChange={(e:ChangeEvent<HTMLInputElement>) => setFormValues({...formValues,consultation:"true" })}  type="radio" name="service" required/>
-            <label htmlFor="consultations">Free Consultations</label>
-
-
-            <input onChange={(e:ChangeEvent<HTMLInputElement>) => setFormValues({...formValues,design:"true" })} type="radio" name="service" />
-            <label htmlFor="design">Design Renderings</label>
-            </section>
-       
-            </div> : ''}
-
            </div>
 
             
@@ -127,7 +108,7 @@ const [formValues, setFormValues] = useState<{
               <div className="col-start-1 col-end-4 flex flex-col justify-start items-start gap-4">
               <FormControl className="w-full" >
                 <FormControl.Label required>Message</FormControl.Label>
-                <FormControl.Input onChange={(e:ChangeEvent<HTMLInputElement>)=>(setFormValues({...formValues, message:e.target.value}))}  name={"message"} placeholder="Type your comment..." required/>
+                <FormControl.Input className="p-4" onChange={(e:ChangeEvent<HTMLInputElement>)=>(setFormValues({...formValues, message:e.target.value}))}  name={"message"} placeholder="Type your comment..." required/>
             </FormControl>
               </div>
                 <button className="rounded-lg bg-mainblue text-white p-4 col-start-1 col-end-4 lg:col-start-3 self-center  ">Send Message</button>
