@@ -7,7 +7,11 @@ import {motion} from 'framer-motion'
 import Link from "next/link";
 import format from "date-fns/format";
 import {FormControl} from "@rewind-ui/core";
+<<<<<<< HEAD
 import toast from "react-hot-toast";
+=======
+import { id } from "date-fns/locale";
+>>>>>>> 23501856eaa5769dabe0be8cd0d6e2602398cf66
 
 
 
@@ -23,7 +27,11 @@ interface BookProps {
 
 const Book: React.FunctionComponent<BookProps> = () => {
   
+<<<<<<< HEAD
      const currentDate = new Date();
+=======
+    const currentDate = new Date();
+>>>>>>> 23501856eaa5769dabe0be8cd0d6e2602398cf66
     const yesterday = new Date()
     yesterday.setDate(currentDate.getDate()-1)
    
@@ -31,8 +39,13 @@ const Book: React.FunctionComponent<BookProps> = () => {
     const formattedTime = format(currentDate, 'h:mm bbb');
     
    
+<<<<<<< HEAD
     var allTimes = ['10:00 am', '11:00 am', '12:00 pm', '1:00 pm', 
     '2:00 pm','3:00 pm','4:00 pm', '5:00 pm','6:00 pm','7:00 pm','8:00 pm','9:00 pm'];
+=======
+    var allTimes = ['10:00 am', '10:30 am', '11:00 am', '11:30 am', '12:00 pm', 
+    '12:30 pm','1:00 pm','1:30 pm', '2:00 pm','2:30 pm','3:00 pm','3:30 pm','4:00 pm','4:30 pm','5:00 pm', '7:00 pm'];
+>>>>>>> 23501856eaa5769dabe0be8cd0d6e2602398cf66
 
     function createCustomDate(hours:number, minutes:number) {
         const currentDate = new Date();
@@ -57,6 +70,7 @@ const Book: React.FunctionComponent<BookProps> = () => {
       }
 
 
+<<<<<<< HEAD
 
 
 
@@ -69,6 +83,16 @@ const Book: React.FunctionComponent<BookProps> = () => {
 
 
 
+=======
+        const [mapTimes, setMapTimes] = useState<string[]>(allTimes)
+      
+        const [date,setDate] = useState<string |undefined | null>()
+        const [time,setTime] = useState<string | undefined | null>()
+        const [form,setForm] = useState<boolean>(false)
+        const [dateAndTime,setDateAndTime] = useState<string>()
+        const [person,setPerson] = useState<string>('Nik')
+   
+>>>>>>> 23501856eaa5769dabe0be8cd0d6e2602398cf66
         
         const handleClick = ({e}: {e:React.MouseEvent<HTMLDivElement>}) => {
             const divTarget = e.target as HTMLDivElement; 
@@ -80,13 +104,18 @@ const Book: React.FunctionComponent<BookProps> = () => {
             return (
                 <motion.div
                 onClick={(e: React.MouseEvent<HTMLDivElement>)=>handleClick({e})}            
+<<<<<<< HEAD
                 className={`flex justify-start items-center p-4 border-2 h-18   hover:cursor-pointer ${t==time ? "bg-mainblue text-white": "text-black"} `}>
+=======
+                className={`flex justify-start items-center p-4 border-2 border-mainblue hover:cursor-pointer ${t==time ? "bg-dodgerblue text-white": "bg-transparent"} `}>
+>>>>>>> 23501856eaa5769dabe0be8cd0d6e2602398cf66
                     {t}
                 </motion.div>
             )
         }
      
         useEffect(() => {
+<<<<<<< HEAD
           setTime(mapTimes[0])
         }, [mapTimes]);
 
@@ -110,6 +139,33 @@ const Book: React.FunctionComponent<BookProps> = () => {
 
 
     
+=======
+            setTime(mapTimes[0])
+         
+        }, [mapTimes]);
+
+     
+        useEffect(() => {
+            if(date == undefined ){
+                setDate(formattedDate)
+            }
+            setDateAndTime(`${date} at ${time} with ${person}`)
+              
+        },[date,time,person]);
+
+
+        useEffect(() => {
+            if(date != undefined) {
+                const [dayOfTheWeek, month,day,year] = date.split(/[ ]/)
+                if(parseInt(day,10) != currentDate.getDate()) {
+                    setMapTimes(allTimes)
+                    
+                }else {
+                    setMapTimes(availableTimes)
+                }
+            }
+        }, [date]);
+>>>>>>> 23501856eaa5769dabe0be8cd0d6e2602398cf66
 
 
     return (  
