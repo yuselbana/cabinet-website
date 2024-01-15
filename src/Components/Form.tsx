@@ -38,7 +38,7 @@ interface FormFieldProps {
     timer:number
     date:string | null |undefined
     time:string | null |undefined
-    person:string
+    person:string | null |undefined
 }
 
 
@@ -68,9 +68,9 @@ const [formValues, setFormValues] = useState<{
     email:string
     phone:string
     message:string
-    date:string | undefined|null,
+    date:string | undefined|null
     time:string | undefined|null
-    person:string
+    person:string| undefined|null
 
 }>({
     fName:'',
@@ -150,7 +150,7 @@ interface FormProps {
     body:string
     time?:string | undefined | null
     date?:string | undefined | null
-    person:string
+    person?:string
    
 }
  
