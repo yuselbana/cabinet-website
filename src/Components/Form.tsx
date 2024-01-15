@@ -18,7 +18,7 @@ interface ContactItemProps {
 
 const ContactItem:React.FunctionComponent<ContactItemProps> = ({desc,icon}) => {
     return (
-        <div className="flex flex-col items-center  gap-4 lg:flex-row lg:items-start">
+        <div className="flex flex-col  items-center text-lg lg:text-xl  gap-4 lg:flex-row lg:items-start">
             <span>{icon}</span>
             <h3>{desc}</h3>
 
@@ -32,15 +32,17 @@ const ContactItem:React.FunctionComponent<ContactItemProps> = ({desc,icon}) => {
 
 interface FormFieldProps {
     form:boolean|undefined,
-    dateAndTime: string|undefined|null,
     submitted:boolean,
     setSubmitted:React.Dispatch<React.SetStateAction<boolean>>
     setTimer:React.Dispatch<React.SetStateAction<number>>
     timer:number
+    date:string | null |undefined
+    time:string | null |undefined
+    person:string
 }
 
 
-const FormField:React.FunctionComponent<FormFieldProps> = ({form,dateAndTime, submitted, setSubmitted,timer, setTimer})=> {
+const FormField:React.FunctionComponent<FormFieldProps> = ({date,time, submitted, setSubmitted,timer, setTimer,person})=> {
 
 'use client';
 
@@ -66,9 +68,9 @@ const [formValues, setFormValues] = useState<{
     email:string
     phone:string
     message:string
-    consultation:string|undefined | null
-    design:string|undefined | null
-    dateAndTime:string | undefined| null
+    date:string | undefined|null,
+    time:string | undefined|null
+    person:string
 
 }>({
     fName:'',
@@ -76,9 +78,10 @@ const [formValues, setFormValues] = useState<{
     email:'',
     phone:'',
     message:'',
-    consultation:'',
-    design:'',
-    dateAndTime:dateAndTime
+    date:date,
+    time:time,
+    person:person
+    
 })
    
   
@@ -105,21 +108,6 @@ const [formValues, setFormValues] = useState<{
             </FormControl>
       
 
-           {form ? <div className="flex flex-col justify-start items-start gap-4 w-full col-start-1 col-end-3">
-            <p>Select Service</p>
-            
-            <section className="flex justify-between items-center gap-2" >
-
-            <input  onChange={(e:ChangeEvent<HTMLInputElement>) => setFormValues({...formValues,consultation:"true" })}  type="radio" name="service" required/>
-            <label htmlFor="consultations">Free Consultations</label>
-
-
-            <input onChange={(e:ChangeEvent<HTMLInputElement>) => setFormValues({...formValues,design:"true" })} type="radio" name="service" />
-            <label htmlFor="design">Design Renderings</label>
-            </section>
-       
-            </div> : ''}
-
            </div>
 
             
@@ -127,7 +115,7 @@ const [formValues, setFormValues] = useState<{
               <div className="col-start-1 col-end-4 flex flex-col justify-start items-start gap-4">
               <FormControl className="w-full" >
                 <FormControl.Label required>Message</FormControl.Label>
-                <FormControl.Input onChange={(e:ChangeEvent<HTMLInputElement>)=>(setFormValues({...formValues, message:e.target.value}))}  name={"message"} placeholder="Type your comment..." required/>
+                <FormControl.Input className="p-4" onChange={(e:ChangeEvent<HTMLInputElement>)=>(setFormValues({...formValues, message:e.target.value}))}  name={"message"} placeholder="Type your comment..." required/>
             </FormControl>
               </div>
                 <button className="rounded-lg bg-mainblue text-white p-4 col-start-1 col-end-4 lg:col-start-3 self-center  ">Send Message</button>
@@ -162,10 +150,11 @@ interface FormProps {
     body:string
     time?:string | undefined | null
     date?:string | undefined | null
-    dateAndTime?:string | undefined | null
+    person:string
+   
 }
  
-const Form: React.FunctionComponent<FormProps> = ({form,setForm,title,body,dateAndTime}) => {
+const Form: React.FunctionComponent<FormProps> = ({form,setForm,title,body,date,time,person}) => {
     'use client';
     const router = useRouter()
     const [submitted, setSubmitted]= useState<boolean>(false)
@@ -195,25 +184,25 @@ const Form: React.FunctionComponent<FormProps> = ({form,setForm,title,body,dateA
     <ThankYouPage timer={timer}/>: 
     
   <>
-    <div className="grid grid-cols-8 place-items-center w-full">
+    <div className="grid grid-cols-8 place-items-start w-full pt-[4rem]">
     {form ?   <span onClick={()=>{setForm(!form)}} className="col-start-1 col-end-2 text-dodgerblue cursor-pointer"><UilBackward/>Back</span> : ''}
-    <div className="flex flex-col justify-center items-center text-center h-full col-start-2 col-end-8">
+    <div className="flex flex-col justify-center items-center text-center h-full col-start-2 col-end-8 gap-4 mb-4 ">
             
             <h1 className="text-3xl lg:text-5xl ">{title} </h1>
             <h3 className="text-gray-400 text-xl">{body}</h3>
-            {form ? <span className="text-mainblue text-xl font-semibold"> {dateAndTime}</span> : ''}
+            {form ? <span className="text-mainblue text-xl font-semibold"> {date} at {time} with {person}</span> : ''}
             </div>
          
   </div>
    
 
-      <div className="row-start-2 row-end-5 grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none h-full w-full lg:w-4/5">       
+      <div className="row-start-2 row-end-5 grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none h-fit w-full lg:w-4/5">       
 
           <div className="flex flex-col justify-between items-center text-center lg:text-left lg:items-start gap-16 bg-mainblue p-8 rounded-xl text-white">
 
           <section>
-              <h2 className="text-3xl font-semibold">Contact Information</h2>
-              <h3>Say something to blahblhjaasd!</h3>
+              <h2 className="text-4xl font-semibold">Contact Information</h2>
+              <h3>Get in touch today!</h3>
           </section>
 
 
@@ -234,7 +223,7 @@ const Form: React.FunctionComponent<FormProps> = ({form,setForm,title,body,dateA
           </div>
 
 
-          <FormField timer={timer} setTimer={setTimer} submitted={submitted} setSubmitted={setSubmitted} dateAndTime={dateAndTime}  form={form}/>
+          <FormField person={person} timer={timer} setTimer={setTimer} submitted={submitted} setSubmitted={setSubmitted} date={date} time={time}  form={form} />
 
 
       </div>
