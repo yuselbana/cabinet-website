@@ -68,13 +68,9 @@ const [formValues, setFormValues] = useState<{
     email:string
     phone:string
     message:string
-<<<<<<< HEAD
     date:string | undefined|null,
     time:string | undefined|null
     person:string
-=======
-    dateAndTime:string | undefined| null
->>>>>>> 23501856eaa5769dabe0be8cd0d6e2602398cf66
 
 }>({
     fName:'',
@@ -82,14 +78,10 @@ const [formValues, setFormValues] = useState<{
     email:'',
     phone:'',
     message:'',
-<<<<<<< HEAD
     date:date,
     time:time,
     person:person
     
-=======
-    dateAndTime:dateAndTime
->>>>>>> 23501856eaa5769dabe0be8cd0d6e2602398cf66
 })
    
   
