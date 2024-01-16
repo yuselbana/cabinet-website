@@ -40,7 +40,7 @@ const NavBar: React.FunctionComponent<NavBarProps> = () => {
                 </div>
                 
     
-                <div className=" text-3xl font-medium row-start-2 row-end-4 flex flex-col items-center justify-center gap-12 h-full self-start">
+                <div className=" text-3xl font-medium row-start-2 row-end-4 flex flex-col items-center justify-start lg:justify-center gap-12 h-full self-start">
                 <SideBarComponent nav={nav} setNav={setNav} href={'/portfolio'} number={"(01)"} navListItem={"Portfolio"}/>
                 <SideBarComponent nav={nav} setNav={setNav} href={'/countertops'} number={"(02)"} navListItem={"Countertops"}/>
                 <SideBarComponent nav={nav} setNav={setNav} href={'/cabinetry'} number={"(03)"} navListItem={"Cabinetry"}/>
